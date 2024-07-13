@@ -33,7 +33,6 @@ border-left: 1px solid rgba(0,0,0,0.14);
 `
 
 const chatsDialog = () => {
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { person }= useContext(AccountContext);
 

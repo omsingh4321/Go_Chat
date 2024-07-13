@@ -17,7 +17,6 @@ height: 125px;
 background-color: #6AA5F2;
 box-shadow: none;
 `
-
 const Messenger=()=>{
     const {account}=useContext(AccountContext);
 return (<Component>

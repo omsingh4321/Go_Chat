@@ -10,8 +10,8 @@ const MessageSchema= new mongoose.Schema({
     reciverId:{
         type: String
     },
-    encodedText: { type: String, required: true },
-    huffmanTree: { type: Object, required: true },
+    text: { type: String },
+    huffmanTree: { type: Object},
     type:{
         type: String
     },

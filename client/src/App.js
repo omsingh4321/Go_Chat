@@ -8,8 +8,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
     <AccountProvider>
-    <Messenger/>
-    
+    <Messenger/>   
     </AccountProvider>
     </GoogleOAuthProvider>
   );

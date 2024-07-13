@@ -45,12 +45,13 @@ const Footer = ({sendText,setText,text,file,setFile,setImage,image}) => {
           if(file)
           {
             const data= new FormData();
-            console.log(file);
             data.append('primary',`${file.lastModified}${file.name}`)
             data.append('name',file.name);
             data.append('file',file);
             setImage(`http://localhost:5000/file/${file.lastModified}${file.name}`);
-           await uploadFile(data);
+            console.log("Yes");
+            await uploadFile(data);
+
           }
       }
       getImage();

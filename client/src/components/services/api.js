@@ -44,7 +44,6 @@ export const getConversation=async(data)=>{
 export const newMessage=async(data)=>{
   try{
    await axios.post(`${url}/message/add`,data);
-
   }
   catch(error)
   {
@@ -63,10 +62,6 @@ export const getMessage=async(id)=>{
 }
 export const uploadFile=async(data)=>{
   try{
-    
-    data.forEach((value, key) => {
-      console.log(key, value);
-    });
     return await axios.post(`${url}/file/upload`,data);
   }
   catch(error){

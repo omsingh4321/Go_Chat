@@ -44,6 +44,11 @@ const Messages = ({person,conversation}) => {
     })
   },[]);
   useEffect(()=>{
+    console.log("Om");
+  console.log(messages);
+  },[messages]);
+  
+  useEffect(()=>{
     inCommingMsg && conversation?.members?.includes(inCommingMsg.senderId) && 
     setMessages(prev=>[...prev,inCommingMsg])
   },[inCommingMsg,conversation])

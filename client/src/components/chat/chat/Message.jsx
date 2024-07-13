@@ -39,8 +39,6 @@ const Time=styled(Typography)`
 `
 
 const Message = ({message}) => {
-  console.log("This is testing ");
-  console.log(message);
 
     const {account}=useContext(AccountContext);
 
@@ -74,23 +72,23 @@ const ImageMessage=({message})=>{
   return(
     <Box style={{position:'relative'}}>
       {
-        message?.decodedText?.includes('pdf') ?
+        message?.text?.includes('pdf') ?
         <Box style={{display: 'flex'}}>
            <img src={iconPDF} alt="pdf"
             style={{width: 80}}
            />
            <Typography style={{fontSize: 14}}
-           >{message.decodedText.split('/').pop()}</Typography>
+           >{message.text.split('/').pop()}</Typography>
         </Box>
         :
         
         <img  style={{width: 300, height: '100%', objectFit:'cover'}}
-        src={message.decodedText} alt={message.decodedText} />
+        src={message.text} alt={message.text} />
         
       }
       <Time style={{position: 'absolute', bottom: 0, right: 0}}>
        <GetAppIcon
-       onClick={(e)=>downloadMedia(e,message.decodedText)}
+       onClick={(e)=>downloadMedia(e,message.text)}
         style={{marginRight: 10, border: '1px solid grey', borderRadius: '50%'
         }}
         fontSize="small"
@@ -104,7 +102,7 @@ const ImageMessage=({message})=>{
 const TextMessage=({message})=>{
  return (
   <>
-            <Text>{message.decodedText}</Text>
+            <Text>{message.text}</Text>
             <Time>{formatDate(message.createdAt)}</Time>
   </>
  )

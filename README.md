@@ -6,15 +6,25 @@
 
 ### Secure Google Authentication
 To ensure the security of our users, Go_Chat requires logging in via Google Authentication. This provides a secure and convenient way to access the application, leveraging Google's trusted authentication system.
-<img src="images/photo1.png" alt="Screenshot of the application">
+<img src="client/images/photo1.png" alt="Screenshot of the application">
 
 ### Real-Time Messaging and File Sharing
 Go_Chat supports real-time messaging, allowing users to communicate instantly. In addition, users can share files, including images, documents, and videos, facilitating richer and more dynamic conversations.
-<img src="images/photo2.png" alt="Screenshot of the application">
+<img src="client/images/photo2.png" alt="Screenshot of the application">
 
 ### Advanced Data Encryption
 Security is a top priority at Go_Chat. I implemented a custom data encryption algorithm to ensure the privacy of our users` communications. The encryption algorithm is based on Huffman Encoding, which I personally developed and integrated into the application. This algorithm encrypts messages before they are stored on our servers, providing robust protection against unauthorized access.
-<img src="images/photo3.png" alt="Screenshot of the application">
+<img src="client/images/photo3.png" alt="Screenshot of the application">
+
+### Now Chat With Ai
+Go_Chat now features a powerful Chat with AI functionality named as GO_AI, bringing intelligent and responsive conversations to your fingertips. Leveraging the capabilities of the Gemini API, This AI provides context-aware responses, making interactions more natural and engaging. This functionality enhances user experience by offering quick answers, generating creative content, and providing assistance with a variety of tasks.
+<img src="client/images/photo4.png" alt="Screenshot of the application">
+
+
+
+
+
+
 ## Additional Functionalities
 
 ### User-Friendly Interface

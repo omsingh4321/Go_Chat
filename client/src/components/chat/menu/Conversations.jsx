@@ -4,6 +4,7 @@ import { useContext ,useEffect,useState} from 'react';
 import { AccountContext } from '../../context/AccountProvider';
 import { setConversation,getConversation } from '../../services/api';
 import { formatDate } from '../../../utils/common-utils';
+import Go_Ai from '../../Images/Go_Ai.jpg';
 const Component=styled(Box)`
 display: flex;
 height: 45px;
@@ -54,8 +55,11 @@ const Conversations =  ({user}) => {
 
   return (
     <Component onClick={()=>getUser()}>
+
        <Box>
-          <Image src={user.picture} alt="Dp"/>
+          <Image 
+          src={ user.sub ==='1234567890'? Go_Ai : user.picture}
+           alt="Dp"/>
        </Box>
        <Box style={{width: '100%'}}>
         <Container>

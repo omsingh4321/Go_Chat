@@ -2,7 +2,7 @@ import React from 'react'
 import { Box,Typography,styled } from '@mui/material'
 import { Search,MoreVert } from '@mui/icons-material'
 import { useContext } from 'react';
-
+import Go_Ai from '../../Images/Go_Ai.jpg';
 import { AccountContext } from '../../context/AccountProvider';
 
 const Header=styled(Box)`
@@ -41,18 +41,16 @@ margin-left: auto;
 
 `
 
-
-
-
-
 const ChatHeader = ({person}) => {
   const {activeUsers}=useContext(AccountContext);
   return (
     <Header>
-      <Image src={person.picture} alt="Dp"/>
+      <Image src={ person.sub ==='1234567890'? Go_Ai : person.picture} alt="Dp"/>
       <Box>
         <Name>{person.name}</Name>
+        {person.sub!=='1234567890' &&
         <Status>{activeUsers?.find(user=>user.sub=== person.sub)? 'Online':'Offline'}</Status>
+        }
       </Box>
       <RightContainer>
         <Search/>

@@ -20,7 +20,6 @@ const dialogStyle={
 
 const Component=styled(Box)`
   display: flex;
-  
 `
 const LeftComponent=styled(Box)`
 min-width: 450px;
@@ -35,8 +34,6 @@ border-left: 1px solid rgba(0,0,0,0.14);
 const chatsDialog = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { person }= useContext(AccountContext);
-
-
   return (
     <Dialog 
     open={true} PaperProps={{

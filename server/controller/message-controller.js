@@ -11,7 +11,7 @@ export const newMessage = async (request, response) => {
             return response.json(500).message("Some Field is missing");
        if(reciverId==='1234567890')
        {
-        const genAI = new GoogleGenerativeAI('AIzaSyCT-mlCjWipFDYoj88Bp__eGkFNObjddGI');
+        const genAI = new GoogleGenerativeAI('YOUR_API_KEY');
 
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
         async function run() {

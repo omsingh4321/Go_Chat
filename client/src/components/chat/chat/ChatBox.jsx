@@ -22,7 +22,6 @@ const [conversation,setConversation]=useState({});
     <Box>
       <ChatHeader person={person}/>
       <Messages person={person} conversation={conversation}/>
-      
     </Box>
   )
 }

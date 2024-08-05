@@ -7,7 +7,7 @@ import { AccountContext } from '../../context/AccountProvider'
 const Conversation = ({text}) => {
 const [users,setUsers]= useState([]);
 
-const {account,socket,setActiveUser}= useContext(AccountContext);
+const {account}= useContext(AccountContext);
 const Component=styled(Box)`
 height: 81vh;
 overflow: overlay;
@@ -29,14 +29,7 @@ opacity: 0.6;
           
     },[text]);
 
-    useEffect(()=>{
-     socket.current.emit("addUsers",account);
-      socket.current.on("getUsers", users=>{
-       setActiveUser(users);
-      });
-
-    },[account])
-
+ 
 
   return (
     <Component>
@@ -44,7 +37,7 @@ opacity: 0.6;
         users.map(user=>(
             user.sub!==account.sub &&
             <>
-          <Conversations user={user} />
+          <Conversations user={user}/>
             <StyleDivider/>
           </>
         ))

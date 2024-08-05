@@ -5,7 +5,8 @@ import { useContext } from 'react'
 import {newMessage,getMessage} from '../../services/api'
 import {AccountContext} from '../../context/AccountProvider'
 import Message from './Message'
-
+import { database } from '../../../firebase';
+import { push, ref, set, onChildAdded } from "firebase/database";
 const Wrapper=styled(Box)`
 background-image: url(${'https://images.unsplash.com/photo-1533628635777-112b2239b1c7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hhdCUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D'});
 background-size: 100%;
@@ -16,14 +17,74 @@ const Component = styled(Box)`
 `;
 
 const Messages = ({person,conversation}) => {
-  const [text,setText]=useState('');
-  const {account,socket,newMessageFlag,setNewMessageFlag} =useContext(AccountContext);
-  const [messages,setMessages]= useState([]);
-  const [file,setFile]=useState();
-  const [image,setImage]=useState('');
+  const [text, setText] = useState('');
+  const { account, newMessageFlag, setNewMessageFlag } = useContext(AccountContext);
+  const [messages, setMessages] = useState([]);
+  const [file, setFile] = useState();
+  const [image, setImage] = useState('');
   const messagesEndRef = useRef(null);
+  const chatListRef = ref(database, `${parseFloat(account.sub)+parseFloat(person.sub)}`); 
+  const [tellme, setTellme] = useState(false);
+  const [inCommingMsg, setIncommingMsgs] = useState(null);
+  const [chats, setChats] = useState([]);
+  const [flag,setFlag]=useState(false);
   
-  const [inCommingMsg,setIncommingMsgs]=useState(null);
+  useEffect(() => {
+    if (account.sub) {
+      onChildAdded(chatListRef, (data) => {
+        setChats((prevChats) => {
+          const newChat = data.val();
+          newChat.timestamp = data.key; 
+          const chatExists = prevChats.some(chat => chat.timestamp === newChat.timestamp);
+          if (!chatExists) {
+            return [...prevChats, newChat];
+          }
+          
+          return prevChats;
+        });
+        
+      });
+    } else {
+      setChats([]);
+    }
+  }, [account.sub]);
+  
+  useEffect(()=>{
+    if(1){
+    setMessages((prevState) => prevState.concat(chats));
+    setFlag(false);
+    }
+    console.log("PPPPPPP");
+    console.log(messages);
+  },[chats]);
+
+  useEffect(()=>{
+    console.log("PPP");
+console.log(messages);
+  },[messages]);
+
+
+  useEffect(() => {
+    if (tellme) {
+      const chatRef = push(chatListRef);
+      set(chatRef, {
+        senderId: account.sub,
+        reciverId: person.sub,
+        text: text,
+        createdAt: Date.now(),
+        type: "text"
+      });
+      setTellme(false);
+      setText('');
+      setFile('');
+      setImage('');
+    }
+  }, [tellme, text, chatListRef, account.sub]);
+
+  const sendChat = () => {
+    setFlag(true);
+    setTellme(true);
+  };
 
   useEffect(()=>{
      const getMessageDetails=async()=>{
@@ -46,14 +107,6 @@ const Messages = ({person,conversation}) => {
   },[conversation?._id,newMessageFlag]);
 
   useEffect(()=>{
-    socket.current.on('getMessage',data=>{
-      setIncommingMsgs({
-        ...data,
-        createdAt: Date.now()
-      })
-    })
-    
-      console.log(messagesEndRef.current);
       if(messagesEndRef.current){
        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       }
@@ -64,7 +117,6 @@ const Messages = ({person,conversation}) => {
   useEffect(()=>{
     inCommingMsg && conversation?.members?.includes(inCommingMsg.senderId) && 
     setMessages(prev=>[...prev,inCommingMsg])
-   
   },[inCommingMsg,conversation])
 
   
@@ -92,11 +144,8 @@ message={
       text: image
     }
   }
- socket.current.emit('sendMessage',message);
  await newMessage(message);
-  setText('');
-  setFile('');
-  setImage('');
+ sendChat();
   setNewMessageFlag(prev=>!prev);
 }
   }

@@ -39,7 +39,6 @@ const Messages = ({person,conversation}) => {
           if (!chatExists) {
             return [...prevChats, newChat];
           }
-          
           return prevChats;
         });
         
@@ -50,12 +49,11 @@ const Messages = ({person,conversation}) => {
   }, [account.sub]);
   
   useEffect(()=>{
-    if(1){
-    setMessages((prevState) => prevState.concat(chats));
-    setFlag(false);
-    }
+    // setMessages((prevState) => prevState.concat(chats));
+    // setFlag(false);
     console.log("PPPPPPP");
     console.log(messages);
+    console.log(chats);
   },[chats]);
 
   useEffect(()=>{
@@ -165,7 +163,13 @@ const Container=styled(Box)`
           </Container>
         ))
       }
-      {/* <div ref={messagesEndRef}/> */}
+      {/* {
+        chats && chats.map(message=>(
+          <Container>
+          <Message message={message}/>
+          </Container>
+        ))
+      } */}
       </Component>
       <Footer sendText={sendText}
         setText={setText}
